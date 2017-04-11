@@ -13,12 +13,12 @@ public class Liblogin extends javax.swing.JFrame {
     ResultSet rs=null;
     PreparedStatement psn=null;
     public Liblogin() {
-        
+         initComponents();
      Toolkit tk=getToolkit();
         Dimension size=tk.getScreenSize();
         setLocation(size.width/2-getWidth()/2,size.height/2-getHeight()/2 );
        
-        initComponents();
+       
         c=db.java_db();
          
         

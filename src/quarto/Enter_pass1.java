@@ -18,10 +18,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Enter_pass extends javax.swing.JFrame {
+public class Enter_pass1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Enter_pass
@@ -30,15 +29,13 @@ public class Enter_pass extends javax.swing.JFrame {
     Connection conn=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
-    public Enter_pass() {
+    public Enter_pass1() {
         initComponents();
           Toolkit tk=getToolkit();
         Dimension size=tk.getScreenSize();
         setLocation(size.width/2-getWidth()/2,size.height/2-getHeight()/2 );
         conn=db.java_db();
         text_act();
-      
-        
     }
 
     /**
@@ -84,7 +81,7 @@ PreparedStatement pst=null;
 
         jLabel3.setBackground(new java.awt.Color(51, 51, 51));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Librarian ID :");
+        jLabel3.setText("Student ID :");
 
         jButton1.setBackground(new java.awt.Color(63, 63, 24));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -173,7 +170,7 @@ PreparedStatement pst=null;
             try{
                 
                 
-            String s1="select username from users where (password= ?)";
+            String s1="select firstname from student_info where (password= ?)";
             pst=conn.prepareStatement(s1);
             pst.setString(1, qw);
             rs=pst.executeQuery();
@@ -182,7 +179,7 @@ PreparedStatement pst=null;
             {  if( rs.getString(1)!=null)
             { h=false;
             break;
-            } 
+            }
                     }
                     
             if(h==true)
@@ -198,22 +195,19 @@ PreparedStatement pst=null;
             if(c==0)
             {
             
-            String s="insert into users (emp_id,username,password,division) values(?,?,?,?)";
+            String s="update student_info set password=? where id=?";
             pst=conn.prepareStatement(s);
-            pst.setString(1, Menu.f);
-            pst.setString(2, Menu.q);
-            pst.setString(3, jp1.getText());
-            pst.setString(4, "LIBRARIAN");
+            pst.setString(1, qw);
+            pst.setString(2, Menu1.f);
             pst.execute();
              JOptionPane.showMessageDialog(null,"Password Saved");
-            
+            this.setVisible(false);
            
            this.dispose();
-           this.setVisible(false);
             }
             else
             {
-                JOptionPane.showMessageDialog(null,"Password format incorrect.Input only Alphabets");
+                JOptionPane.showMessageDialog(null,"Password format incorrect");
                 
             }
             }
@@ -246,7 +240,7 @@ PreparedStatement pst=null;
     {
 
      
-     jLd.setText(Menu.f);
+     jLd.setText(Menu1.f);
      
 
     }
@@ -268,19 +262,20 @@ PreparedStatement pst=null;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Enter_pass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Enter_pass1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Enter_pass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Enter_pass1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Enter_pass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Enter_pass1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Enter_pass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Enter_pass1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Enter_pass().setVisible(true);
+            new Enter_pass1().setVisible(true);
         });
     }
 
